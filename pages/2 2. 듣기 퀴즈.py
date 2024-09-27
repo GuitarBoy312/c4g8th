@@ -7,9 +7,13 @@ import re
 # OpenAI 클라이언트 초기화
 client = OpenAI(api_key=st.secrets["openai_api_key"])
 
+# 캐릭터와 성별 정의
+characters = {
+    "Paul": "male", "Jello": "male", "Uju": "male", "Khan": "male", "Eric": "male",
+    "Bora": "female", "Tina": "female", "Amy": "female"
+}
+
 def generate_question():
-    characters = ["Paul", "Jello", "Uju", "Bora", "Tina", "Khan", "Amy", "Eric"]
-    
     questions = [
         "What do you do, {name}?"
     ]
@@ -32,8 +36,8 @@ def generate_question():
     selected_question = random.choice(questions)
     selected_answer = random.choice(answers)
     selected_korean_question = random.choice(korean_questions)
-    speaker_a = random.choice(characters)
-    speaker_b = random.choice([c for c in characters if c != speaker_a])
+    speaker_a = random.choice(list(characters.keys()))
+    speaker_b = random.choice([c for c in characters.keys() if c != speaker_a])
     
     formatted_question = selected_question.format(name=speaker_b)
     
@@ -81,7 +85,8 @@ def split_dialogue(text):
             speakers[speaker].append(content)
     return speakers
 
-def text_to_speech(text, voice):
+def text_to_speech(text, speaker):
+    voice = "alloy" if characters[speaker] == "female" else "echo"
     response = client.audio.speech.create(
         model="tts-1",
         voice=voice,
@@ -100,8 +105,8 @@ def generate_dialogue_audio(dialogue):
     
     for speaker, lines in speakers.items():
         text = " ".join(lines)
-        voice = "alloy" if speaker == "A" else "echo"  # A는 여성 목소리, B는 남성 목소리
-        audio_tag = text_to_speech(text, voice)
+        speaker_name = re.search(r'([A-Za-z]+):', lines[0]).group(1)  # 대화에서 화자 이름 추출
+        audio_tag = text_to_speech(text, speaker_name)
         audio_tags.append(audio_tag)
     
     return "".join(audio_tags)
