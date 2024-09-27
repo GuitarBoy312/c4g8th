@@ -54,6 +54,7 @@ def generate_essay_question():
     return response.choices[0].message.content
 
 def generate_conversation_question():
+    name = random.choice(["Paul", "Jello", "Uju", "Khan", "Eric", "Bora", "Tina", "Amy"])
     answer = random.choice([
         "I'm a police officer.",
         "I'm a firefighter.",
@@ -67,14 +68,14 @@ def generate_conversation_question():
     question_format = "대화를 읽고 직업에 관해 묻는 질문"
 
     key_expression = f'''
-    A: What do you do?
+    A: What do you do, {name}?
     B: {answer}
     '''
     prompt = f"""{key_expression}과 같은 구문을 사용 하는 CEFR A1 수준의 간단한 영어 대화를 생성해주세요. 
     영어 대화를 생성할 때, 마지막 대화 내용은 알려주지 말고대화 내용에 관한 객관식 질문으로 만들어야 합니다. 
     그 후 대화 내용에 관한 객관식 질문을 한국어로 만들어주세요.  
     조건: 문제의 정답은 1개 입니다. 
-    A와 B가 대화할 때 상대방의 이름을 부르면서 대화를 합니다. 
+    A와 B가 대화할 때 A가 B의 이름을 부르면서 대화를 합니다. 
     영어 대화는 A와 B가 각각 1번 말하고 끝납니다.
     형식:
     [영어 대화]
