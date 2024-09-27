@@ -134,6 +134,7 @@ with st.expander("❗❗ 글상자를 펼쳐 사용방법을 읽어보세요 �
     🔹I'm a farmer. 🚜<br>
     🔹I'm a singer. 🎤<br>
     🔹I'm a cook. 👨‍🍳<br>
+    ❓ 어렵다면 잉글링의 답변을 따라하는 것도 좋은 방법이예요.
 ''', unsafe_allow_html=True)
 
     
