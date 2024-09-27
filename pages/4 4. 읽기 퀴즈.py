@@ -7,7 +7,7 @@ import re
 client = OpenAI(api_key=st.secrets["openai_api_key"])
 
 def generate_essay_question():
-    name = random.choice(["You","Eric","Mia","Paul","Sara","Someone's name"])
+    name = random.choice(["Paul", "Jello", "Uju", "Khan", "Eric", "Bora", "Tina", "Amy"])
     question = "What do you do?"
     answer = random.choice([
         "I'm a police officer.",
