@@ -51,8 +51,8 @@ def generate_essay_question():
     return response.choices[0].message.content
 
 def generate_conversation_question():
-     name = random.choice(["Paul", "Jello", "Uju", "Khan", "Eric", "Bora", "Tina", "Amy"])
-     answer = random.choice([
+    name = random.choice(["Paul", "Jello", "Uju", "Khan", "Eric", "Bora", "Tina", "Amy"])
+    answer = random.choice([
         "I'm a police officer.",
         "I'm a firefighter.",
         "I'm a doctor.",
@@ -61,7 +61,7 @@ def generate_conversation_question():
         "I'm a farmer.",
         "I'm a singer.",
         "I'm a cook."])
-    question_format = "대화를 읽고 직업이 관해 묻는 질문"
+    question_format = "대화를 읽고 직업에 관해 묻는 질문"
 
     key_expression = f'''
     {name}: What do you do?
