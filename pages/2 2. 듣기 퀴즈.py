@@ -11,23 +11,22 @@ def generate_question():
     characters = ["Paul", "Jello", "Uju", "Bora", "Tina", "Khan", "Amy", "Eric"]
     
     questions = [
-        "What are you doing, {name}?"
+        "What do you do, {name}?"
     ]
     
     answers = [
-        "I'm singing.",
-        "I'm dancing.",
-        "I'm cooking.",
-        "I'm sleeping.",
-        "I'm making a doll.",
-        "I'm cleaning the house.",
-        "I'm watching TV.",
-        "I'm washing dishes."
+        "I'm a police officer.",
+        "I'm a firefighter.",
+        "I'm a doctor.",
+        "I'm a pilot.",
+        "I'm a scientist.",
+        "I'm a farmer.",
+        "I'm a singer.",
+        "I'm a cook."
     ]
     
     korean_questions = [
-        "무엇에 대해 이야기 했나요?",
-        "{name}은 무엇을 하고 있나요?"
+        "{name}의 직업은 무엇인가요?"
     ]
     
     selected_question = random.choice(questions)
