@@ -15,25 +15,25 @@ SYSTEM_MESSAGE = {
     "content": '''
     너는 초등학교 영어교사야. 나는 초등학생이고, 나와 영어로 대화하는 연습을 해 줘. 영어공부와 관계없는 질문에는 대답할 수 없어. 그리고 나는 무조건 영어로 말할거야. 내 발음이 좋지 않더라도 영어로 인식하도록 노력해 봐.            
     [대화의 제목]
-    Can you swim?
+    What do you do?
     [지시]
-    1. 내가 너에게 "What are you doing?" 이라고 질문을 할거야. 
-    2. 너는 내 질문을 듣고, [대답] 중 하나를 무작위로 골래 대답을 해. 이 때, 이모지도 같이 출력해.
-    3. 그 후, 너는 "What are you doing?" 이라고 질문해. 
+    1. 내가 너에게 "What do you do?" 라고 질문을 할거야. 
+    2. 너는 내 질문을 듣고, [대답] 중 하나를 무작위로 골라 대답을 해. 이 때, 이모지도 같이 출력해.
+    3. 그 후, 너는 "What do you do?" 라고 질문해. 
        그러면 내가 대답을 할거야.
     4. 내가 또 질문을 하면 [대답]을 무작위로 선택해서 대답해.
-    5. 내가 그만하자고 할 때까�� 계속 주고 받으며 대화하자.
+    5. 내가 그만하자고 할 때까지 계속 주고 받으며 대화하자.
     [질문]
-    What are you doing?
+    What do you do?
     [대답]
-    I'm singing. 🎤  
-    I'm dancing. 💃  
-    I'm cooking. 👨‍🍳  
-    I'm sleeping. 😴  
-    I'm making a doll. 🧸  
-    I'm cleaning the house. 🧹  
-    I'm watching TV. 📺  
-    I'm washing dishes. 🍽️ 
+    I'm a police officer. 👮
+    I'm a firefighter. 🚒
+    I'm a doctor. 👨‍⚕️
+    I'm a pilot. ✈️
+    I'm a scientist. 🔬
+    I'm a farmer. 🚜
+    I'm a singer. 🎤
+    I'm a cook. 👨‍🍳
     '''
 }
 
@@ -123,17 +123,17 @@ with st.expander("❗❗ 글상자를 펼쳐 사용방법을 읽어보세요 �
     st.write("다음 보기와 같이 잉글링에게 질문과 대답을 해 보세요.")
     st.markdown('''
     [질문]<br>
-    🔸What are you doing? 🤔<br><br>
+    🔸What do you do? 🤔<br><br>
     
     [대답]<br>
-    🔹I'm singing. 🎤<br>
-    🔹I'm dancing. 💃<br>
-    🔹I'm cooking. 👨‍🍳<br>
-    🔹I'm sleeping. 😴<br>
-    🔹I'm making a doll. 🧸<br>
-    🔹I'm cleaning the house. 🧹<br>
-    🔹I'm watching TV. 📺<br>
-    🔹I'm washing dishes. 🍽️<br>
+    🔹I'm a police officer. 👮<br>
+    🔹I'm a firefighter. 🚒<br>
+    🔹I'm a doctor. 👨‍⚕️<br>
+    🔹I'm a pilot. ✈️<br>
+    🔹I'm a scientist. 🔬<br>
+    🔹I'm a farmer. 🚜<br>
+    🔹I'm a singer. 🎤<br>
+    🔹I'm a cook. 👨‍🍳<br>
 ''', unsafe_allow_html=True)
 
     
