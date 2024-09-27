@@ -36,9 +36,17 @@ def generate_question():
     selected_question = random.choice(questions)
     selected_answer = random.choice(answers)
     selected_korean_question = random.choice(korean_questions)
-    speaker_a = random.choice(list(characters.keys()))
-    speaker_b = random.choice([c for c in characters.keys() if c != speaker_a])
     
+    # 성별이 다른 두 화자 선택
+    male_speakers = [name for name, gender in characters.items() if gender == "male"]
+    female_speakers = [name for name, gender in characters.items() if gender == "female"]
+    speaker_a = random.choice(male_speakers)
+    speaker_b = random.choice(female_speakers)
+    
+    # 무작위로 순서 결정
+    if random.choice([True, False]):
+        speaker_a, speaker_b = speaker_b, speaker_a
+
     formatted_question = selected_question.format(name=speaker_b)
     
     key_expression = f"""
