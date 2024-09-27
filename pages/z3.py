@@ -165,7 +165,7 @@ def parse_question_data(data, question_type):
 
 def get_explanation_essay(question, passage, correct_answer, selected_option):
     prompt = f"""
-    이 학생에게  정답이 무엇인지, 그들의 답변이 왜 틀렸는지, 그들의 답변을 영어로 표현하면 무엇인지 설명해주세요. 
+    이 학생에게  정답이 무엇인지, 그들의 답변이 왜 틀렸는지, 영어로 표현하면 무엇인지 설명해주세요. 
     설명은 친절하고 격려하는 톤으로 작성해주세요. 
     대화의 내용을 참조하여 구체적으로 설명해주세요.
 
@@ -188,7 +188,7 @@ def get_explanation_essay(question, passage, correct_answer, selected_option):
 
 def get_explanation_dialogue(question, dialogue, correct_answer, selected_option):
     prompt = f"""
-    이 학생에게  정답이 무엇인지, 그들의 답변이 왜 틀렸는지, 그들의 답변을 영어로 표현하면 무엇인지 설명해주세요.  
+    이 학생에게  정답이 무엇인지, 그들의 답변이 왜 틀렸는지, 영어로 표현하면 무엇인지 설명해주세요.  
     설명은 친절하고 격려하는 톤으로 작성해주세요. 
     대화의 내용을 참조하여 구체적으로 설명해주세요.
 
