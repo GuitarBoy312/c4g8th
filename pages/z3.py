@@ -71,7 +71,7 @@ def generate_conversation_question():
     A: What do you do, {name}?
     B: {answer}
     '''
-    prompt = f"""{key_expression}과 같은 CEFR A1 수준의 간단한 영어 대화를 생성해주세요. 
+    prompt = f"""{key_expression}과 똑같은 CEFR A1 수준의 간단한 영어 대화를 생성해주세요. 
     영어 대화를 생성할 때, 마지막 대화 내용은 알려주지 말고대화 내용에 관한 객관식 질문으로 만들어야 합니다. 
     그 후 대화 내용에 관한 객관식 질문을 한국어로 만들어주세요.  
     조건: 문제의 정답은 1개 입니다. 
