@@ -51,7 +51,8 @@ def generate_essay_question():
     return response.choices[0].message.content
 
 def generate_conversation_question():
-    answer = random.choice([
+     name = random.choice(["Paul", "Jello", "Uju", "Khan", "Eric", "Bora", "Tina", "Amy"])
+     answer = random.choice([
         "I'm a police officer.",
         "I'm a firefighter.",
         "I'm a doctor.",
