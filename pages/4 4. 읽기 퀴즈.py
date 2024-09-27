@@ -8,21 +8,21 @@ client = OpenAI(api_key=st.secrets["openai_api_key"])
 
 def generate_essay_question():
     name = random.choice(["You","Eric","Mia","Paul","Sara","Someone's name"])
-    question = "What are you doing?"
+    question = "What do you do?"
     answer = random.choice([
-        "I'm singing.",
-        "I'm dancing.",
-        "I'm cooking.",
-        "I'm sleeping.",
-        "I'm making a doll.",
-        "I'm cleaning the house.",
-        "I'm watching TV.",
-        "I'm washing dishes."
+        "I'm a police officer.",
+        "I'm a firefighter.",
+        "I'm a doctor.",
+        "I'm a pilot.",
+        "I'm a scientist.",
+        "I'm a farmer.",
+        "I'm a singer.",
+        "I'm a cook."
     ])
-    question_format = "대화를 읽고 무엇을 하고 있는지에 관해 묻는 질문"
+    question_format = "대화를 읽고 직업에 관해 묻는 질문"
 
     key_expression = f'''
-    A: What are you doing?
+    A: What do you do?
     B: {answer}
     '''
     prompt = f"""
@@ -52,24 +52,18 @@ def generate_essay_question():
 
 def generate_conversation_question():
     answer = random.choice([
-    "I'm singing in the shower.",
-    "I'm dancing to my favorite song.",
-    "I'm cooking dinner for my family.",
-    "I'm sleeping in my comfortable bed.",
-    "I'm making a doll for my little sister.",
-    "I'm cleaning the house before my parents come home.",
-    "I'm watching TV in the living room.",
-    "I'm washing dishes after lunch.",
-    "I'm reading a book in my room.",
-    "I'm playing video games on my computer.",
-    "I'm doing my homework at my desk.",
-    "I'm talking on the phone with my friend.",
-    "I'm writing in my diary.",
-    "I'm exercising in the garden."])
-    question_format = "대화를 읽고 무엇을 하고 있는지에 관해 묻는 질문"
+        "I'm a police officer.",
+        "I'm a firefighter.",
+        "I'm a doctor.",
+        "I'm a pilot.",
+        "I'm a scientist.",
+        "I'm a farmer.",
+        "I'm a singer.",
+        "I'm a cook."])
+    question_format = "대화를 읽고 직업이 관해 묻는 질문"
 
     key_expression = f'''
-    A: What are you doing?
+    A: What do you do?
     B: {answer}
     '''
     prompt = f"""{key_expression}과 같은 구문을 사용 하는 CEFR A1 수준의 간단한 영어 대화를 생성해주세요. 
@@ -154,7 +148,7 @@ def main():
 
     # 메인 화면 구성
     st.header("✨인공지능 영어 퀴즈 선생님 퀴즐링🕵️‍♀️")
-    st.subheader("지금 하고 있는 일에 대한 영어읽기 퀴즈🕺")
+    st.subheader("직업을 묻고 답하는말에 대한 영어읽기 퀴즈👨‍🚀👩‍🚒")
     st.divider()
 
     #확장 설명
@@ -193,6 +187,7 @@ def main():
 
             st.divider()
             st.write(passage)
+            st.divider()
 
             st.subheader("다음 중 알맞은 답을 골라보세요.")
             for i, option in enumerate(options, 1):
