@@ -54,7 +54,7 @@ st.session_state.num_blanks = st.slider("빈칸 개수", min_value=1, max_value=
 
 if st.session_state.question_generated:
     st.markdown("### 문제")
-    st.write("빈칸을 채워 전체 단어를 입력��세요:")
+    st.write("빈칸을 채워 전체 단어를 입력하세요:")
     st.markdown(f"<h2 style='text-align: center;'>{st.session_state.blanked_word} {st.session_state.emoji}</h2>", unsafe_allow_html=True)
       
     with st.form(key='answer_form'):
