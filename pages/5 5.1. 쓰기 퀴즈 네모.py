@@ -3,7 +3,7 @@ import random
 
 # 단어와 이모지 목록
 word_emojis = {
-    'really': '❗', 'scientist': '🔬', 'busy': '😰', 'clean': '🧼', 
+    'really': '❗', 'scientist': '🔬', 'busy': '😰', 'clean': '🧹', 
     'dish': '🍽️', 'doll': '🧸', 'homework': '📚', 'house': '🏠', 
     'umbrella': '☂️', 'watch': '⌚', 'cook': '👨‍🍳', 'doctor': '👨‍⚕️', 
     'farmer': '👨‍🌾', 'fire fighter': '👨‍🚒', 'pilot': '👨‍✈️', 'police officer': '👮‍♂️'
