@@ -12,19 +12,21 @@ if 'current_question_type' not in st.session_state:
 
 def generate_essay_question():
     name = random.choice(["Paul", "Jello", "Uju", "Khan", "Eric", "Bora", "Tina", "Amy"])
-    question = random.choice([
-        "Do you know anything about pansori?",
-        "Do you know anything about yakgwa?",
-        "Do you know anything about Hangeul?"
-    ])
+    question = "What do you do?"
     answer = random.choice([
-        "Yes, I know about it.",
-        "No, I have no idea."
+        "I'm a police officer.",
+        "I'm a firefighter.",
+        "I'm a doctor.",
+        "I'm a pilot.",
+        "I'm a scientist.",
+        "I'm a farmer.",
+        "I'm a singer.",
+        "I'm a cook."
     ])
-    question_format = "대화를 읽고 한국 문화에 관해 묻는 질문"
+    question_format = "대화를 읽고 직업에 관해 묻는 질문"
 
     key_expression = f'''
-    A: {question}
+    A: What do you do?
     B: {answer}
     '''
     prompt = f"""
@@ -53,19 +55,20 @@ def generate_essay_question():
 
 def generate_conversation_question():
     name = random.choice(["Paul", "Jello", "Uju", "Khan", "Eric", "Bora", "Tina", "Amy"])
-    question = random.choice([
-        "Do you know anything about pansori?",
-        "Do you know anything about yakgwa?",
-        "Do you know anything about Hangeul?"
-    ])
     answer = random.choice([
-        "Yes, I know about it.",
-        "No, I have no idea."
+        "I'm a police officer.",
+        "I'm a firefighter.",
+        "I'm a doctor.",
+        "I'm a pilot.",
+        "I'm a scientist.",
+        "I'm a farmer.",
+        "I'm a singer.",
+        "I'm a cook."
     ])
-    question_format = "대화를 읽고 한국 문화에 관해 묻는 질문"
+    question_format = "대화를 읽고 직업에 관해 묻는 질문"
 
     key_expression = f'''
-    A: {name}, {question}?
+    A: What do you do, {name}?
     B: {answer}
     '''
     prompt = f"""{key_expression}과 똑같은 CEFR A1 수준의 간단한 영어 대화를 생성해주세요. 
