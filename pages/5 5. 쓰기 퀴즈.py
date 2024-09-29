@@ -9,8 +9,27 @@ word_emojis = {
     'farmer': '👨‍🌾', 'fire fighter': '👨‍🚒', 'pilot': '👨‍✈️', 'police officer': '👮‍♂️'
 }
 
+# 세션 상태 초기화
+if 'question_generated' not in st.session_state:
+    st.session_state.question_generated = False
+    st.session_state.blanked_word = ""
+    st.session_state.emoji = ""
+    st.session_state.correct_word = ""
+    st.session_state.num_blanks = 1
+    st.session_state.used_words = set()
+    st.session_state.all_words_used = False
+
 def generate_question(num_blanks):
-    word, emoji = random.choice(list(word_emojis.items()))
+    available_words = set(word_emojis.keys()) - st.session_state.used_words
+    if not available_words:
+        st.session_state.all_words_used = True
+        st.session_state.used_words.clear()
+        available_words = set(word_emojis.keys())
+    
+    word = random.choice(list(available_words))
+    emoji = word_emojis[word]
+    st.session_state.used_words.add(word)
+    
     word_length = len(word)
     num_blanks = min(num_blanks, word_length)  # 단어 길이보다 빈칸이 많지 않도록 함
     
@@ -18,7 +37,7 @@ def generate_question(num_blanks):
     blanked_word = list(word)
     for index in blank_indices:
         blanked_word[index] = '⬜'
-    blanked_word = ' '.join(blanked_word)  # 각 문��� 사이에 공백 추가
+    blanked_word = ' '.join(blanked_word)  # 각 문 사이에 공백 추가
     
     return blanked_word, emoji, word
 
@@ -40,14 +59,6 @@ with st.expander("❗❗ 글상자를 펼쳐 사용방법을 읽어보세요 �
     🙏 그럴 때에는 [새 문제 만들기] 버튼을 눌러주세요.
     """
     , unsafe_allow_html=True)
-
-# 세션 상태 초기화
-if 'question_generated' not in st.session_state:
-    st.session_state.question_generated = False
-    st.session_state.blanked_word = ""
-    st.session_state.emoji = ""
-    st.session_state.correct_word = ""
-    st.session_state.num_blanks = 1
 
 # 슬라이더를 사이드바에서 메인 영역으로 이동
 st.session_state.num_blanks = st.slider("빈칸 개수", min_value=1, max_value=3, value=1)
@@ -81,5 +92,6 @@ if st.button("새 문제 만들기"):
     st.session_state.correct_word = correct_word
     st.session_state.question_generated = True
     
-    # 페이지 새로고침
     st.rerun()
+
+# 진행 상황 표시 제거
