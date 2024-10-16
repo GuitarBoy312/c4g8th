@@ -22,7 +22,7 @@ words = {
     'farmer' : '농부',
     'fire fighter': '소방관',
     'pilot': '조종사',
-    'police officer': '경찰관'    
+    'police officer': '경찰관'
 }
 
 def generate_question():
@@ -44,11 +44,35 @@ def generate_question():
     random.shuffle(options)
     return question, options, correct_answer
 
-# Streamlit UI
+# 단어 퀴즈 상태 초기화
+if 'vocabulary_quiz_state' not in st.session_state:
+    st.session_state.vocabulary_quiz_state = {
+        'question_generated': False,
+        'correct_count': 0,
+        'total_count': 0,
+        'current_question': None,
+        'current_options': None,
+        'current_answer': None,
+        'initialized': False,
+        'answered': False  # 새로운 상태 추가
+    }
+
+# 앱이 로드될 때마다 초기화
+if not st.session_state.vocabulary_quiz_state['initialized']:
+    st.session_state.vocabulary_quiz_state = {
+        'question_generated': False,
+        'correct_count': 0,
+        'total_count': 0,
+        'current_question': None,
+        'current_options': None,
+        'current_answer': None,
+        'initialized': True,
+        'answered': False  # 새로운 상태 추가
+    }
 
 # 메인 화면 구성
 st.header("✨인공지능 영어단어 퀴즈 선생님 퀴즐링🕵️‍♀️")
-st.subheader("직업을 묻고 답하는말에 대한 영어단어 퀴즈👨‍🚀👩‍🚒")
+st.subheader("🦝동물의 생김새와 크기에 대한 영어단어 퀴즈🦩")
 st.divider()
 
 #확장 설명
@@ -65,42 +89,47 @@ with st.expander("❗❗ 글상자를 펼쳐 사용방법을 읽어보세요 �
     """
     ,  unsafe_allow_html=True)
 
-# 세션 상태 초기화
-if 'question_generated' not in st.session_state:
-    st.session_state.question_generated = False
-
-if st.button("새 문제 만들기"):
-    # 세션 상태 초기화
-    for key in list(st.session_state.keys()):
-        del st.session_state[key]
-    
-    question, options, correct_answer = generate_question()
-    
-    st.session_state.question = question
-    st.session_state.options = options
-    st.session_state.correct_answer = correct_answer
-    st.session_state.question_generated = True
-    
-    # 페이지 새로고침
-    st.rerun()
-
-if 'question_generated' in st.session_state and st.session_state.question_generated:
-
+if st.session_state.vocabulary_quiz_state['question_generated']:
     st.markdown("### 질문")
-    st.write(st.session_state.question)
+    st.write(st.session_state.vocabulary_quiz_state['current_question'])
       
     with st.form(key='answer_form'):
-        selected_option = st.radio("정답을 선택하세요:", st.session_state.options, index=None)
+        selected_option = st.radio("정답을 선택하세요:", st.session_state.vocabulary_quiz_state['current_options'], index=None)
         submit_button = st.form_submit_button(label='정답 확인')
 
-        if submit_button:
+        if submit_button and not st.session_state.vocabulary_quiz_state['answered']:
             if selected_option:
                 st.info(f"선택한 답: {selected_option}")
-                if selected_option.strip() == st.session_state.correct_answer.strip():  
+                st.session_state.vocabulary_quiz_state['answered'] = True
+                st.session_state.vocabulary_quiz_state['total_count'] += 1  # 총 문제 수 증가
+                if selected_option.strip() == st.session_state.vocabulary_quiz_state['current_answer'].strip():  
                     st.success("정답입니다!")
+                    st.session_state.vocabulary_quiz_state['correct_count'] += 1
                 else:
-                    st.error(f"틀렸습니다. 정답은 {st.session_state.correct_answer}입니다.")
+                    st.error(f"틀렸습니다. 정답은 {st.session_state.vocabulary_quiz_state['current_answer']}입니다.")
             else:
                 st.warning("답을 선택해주세요.")
+        elif st.session_state.vocabulary_quiz_state['answered']:
+            st.warning("이미 답변을 제출했습니다. 새 문제를 만들어주세요.")
 
-# ... 기존 코드 ...
+else:
+    st.info("아래의 '새 문제 만들기' 버튼을 눌러 퀴즈를 시작하세요.")
+
+# 새 문제 만들기 버튼
+if st.button("새 문제 만들기"):
+    question, options, correct_answer = generate_question()
+    st.session_state.vocabulary_quiz_state['current_question'] = question
+    st.session_state.vocabulary_quiz_state['current_options'] = options
+    st.session_state.vocabulary_quiz_state['current_answer'] = correct_answer
+    st.session_state.vocabulary_quiz_state['question_generated'] = True
+    st.session_state.vocabulary_quiz_state['answered'] = False  # 답변 상태 초기화
+    # st.session_state.vocabulary_quiz_state['total_count'] += 1  # 이 줄 제거
+    st.rerun()
+
+# 사이드바에 정답 카운트 표시
+st.sidebar.header("단어퀴즈 점수")
+st.sidebar.write(f"총 문제 수: {st.session_state.vocabulary_quiz_state['total_count']}")
+st.sidebar.write(f"맞춘 문제 수: {st.session_state.vocabulary_quiz_state['correct_count']}")
+if st.session_state.vocabulary_quiz_state['total_count'] > 0:
+    accuracy = int((st.session_state.vocabulary_quiz_state['correct_count'] / st.session_state.vocabulary_quiz_state['total_count']) * 100)
+    st.sidebar.write(f"정확도: {accuracy}%")
