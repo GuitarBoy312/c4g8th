@@ -47,52 +47,48 @@ if 'previous_selection' not in st.session_state:
     st.session_state.previous_selection = None
 
 def generate_conversation_question():
-    names = ["Marie", "Yena", "Juwon", "Emma", "Dave", "Linh", "Chanho"]
-    activities = [
-        "I played badminton",
-        "I watched a movie",
-        "I made a car",
-        "I went fishing",
-        "I went shopping",
-        "I went to the museum",
-        "I played soccer",
-        "I played baseball",
-        "I learned about Korean history",
-        "I went to the space center"
+    names = ["Paul", "Jello", "Uju", "Khan", "Eric", "Bora", "Tina", "Amy"]
+    occupations = [
+        "I'm a police officer",
+        "I'm a firefighter",
+        "I'm a doctor",
+        "I'm a pilot",
+        "I'm a scientist",
+        "I'm a farmer",
+        "I'm a singer",
+        "I'm a cook"
     ]
 
     name = random.choice(names)
-    activity = random.choice(activities)
+    occupation = random.choice(occupations)
 
     dialogue = f"""
-A: {name}, what did you do yesterday?
-B: {activity}.
+A: {name}, what do you do?
+B: {occupation}.
 """
 
-    question = f"{name}은 어제 무엇을 했나요?"
-    correct_answer = activity
+    question = f"{name}의 직업은 무엇인가요?"
+    correct_answer = occupation
 
     # 오답 생성
-    wrong_answers = random.sample([a for a in activities if a != activity], 3)
-    options = [activity] + wrong_answers
+    wrong_answers = random.sample([o for o in occupations if o != occupation], 3)
+    options = [occupation] + wrong_answers
     random.shuffle(options)
 
     # 선택지를 한국어로 변환
-    korean_activities = {
-        "I played badminton": "배드민턴을 쳤다",
-        "I watched a movie": "영화를 봤다",
-        "I made a car": "자동차를 만들었다",
-        "I went fishing": "낚시를 갔다",
-        "I went shopping": "쇼핑을 갔다",
-        "I went to the museum": "박물관에 갔다",
-        "I played soccer": "축구를 했다",
-        "I played baseball": "야구를 했다",
-        "I learned about Korean history": "한국 역사를 공부했다",
-        "I went to the space center": "우주 센터에 갔다"
+    korean_occupations = {
+        "I'm a police officer": "경찰관",
+        "I'm a firefighter": "소방관",
+        "I'm a doctor": "의사",
+        "I'm a pilot": "비행기 조종사",
+        "I'm a scientist": "과학자",
+        "I'm a farmer": "농부",
+        "I'm a singer": "가수",
+        "I'm a cook": "요리사"
     }
 
-    korean_options = [korean_activities[opt] for opt in options]
-    correct_answer = korean_activities[correct_answer]
+    korean_options = [korean_occupations[opt] for opt in options]
+    correct_answer = korean_occupations[correct_answer]
 
     return f"""
 [영어 대화]
@@ -201,7 +197,7 @@ def display_question():
 
 def main():
     st.header("✨인공지능 영어 퀴즈 선생님 퀴즐링🕵️‍♀️")
-    st.subheader("어제 한 일에 대해 묻고 답하기 영어읽기 퀴즈🚵‍♂️")
+    st.subheader("직업을 묻고 답하기 영어읽기 퀴즈👨‍🚀👩‍🚒")
     st.divider()
 
     # 확장 설명
@@ -220,8 +216,6 @@ def main():
 
     if st.session_state.reading_quiz_current_question:
         display_question()
-
-    st.divider()
 
     if st.button("새 문제 만들기"):
         with st.spinner("새로운 문제를 생성 중입니다..."):
