@@ -13,8 +13,8 @@ characters = {
     "Bora": "female", "Tina": "female", "Amy": "female"
 }
 
-# 직업 목록 수정
-occupations = [
+# 직업 목록
+jobs = [
     ("경찰관", "I'm a police officer. 👮"),
     ("소방관", "I'm a firefighter. 👨‍🚒"),
     ("의사", "I'm a doctor. 👩‍⚕️"),
@@ -68,18 +68,18 @@ def generate_question():
         speaker_a, speaker_b = speaker_b, speaker_a
     
     # 직업 목록에서 순차적으로 정답 선택
-    correct_occupation = occupations[st.session_state.activity_index]
-    st.session_state.activity_index = (st.session_state.activity_index + 1) % len(occupations)
+    correct_job = jobs[st.session_state.activity_index]
+    st.session_state.activity_index = (st.session_state.activity_index + 1) % len(jobs)
     
-    wrong_occupations = random.sample([o for o in occupations if o != correct_occupation], 3)
+    wrong_jobs = random.sample([j for j in jobs if j != correct_job], 3)
     
-    all_options = [correct_occupation] + wrong_occupations
+    all_options = [correct_job] + wrong_jobs
     random.shuffle(all_options)
     
     options = [f"{chr(65 + i)}. {option[0]}" for i, option in enumerate(all_options)]
-    correct_answer = next(opt for opt in options if correct_occupation[0] in opt)
+    correct_answer = next(opt for opt in options if correct_job[0] in opt)
     
-    dialogue = f"{speaker_a}: What do you do, {speaker_b}?\n{speaker_b}: {correct_occupation[1]}"
+    dialogue = f"{speaker_a}: What do you do, {speaker_b}?\n{speaker_b}: {correct_job[1]}"
     question = f"{speaker_b}의 직업은 무엇인가요?"
     
     return {
